@@ -1,0 +1,8 @@
+use shopping;
+drop table cart_promotions;
+drop table cartproducts;
+drop table carts;
+drop table promotions;
+drop table products;
+drop table categories;
+drop table users;

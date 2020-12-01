@@ -1,0 +1,9 @@
+create DATABASE shopping;
+use shopping;
+create table users(userid int auto_increment primary key not null,created_on timestamp,username varchar(64) not null unique,email varchar(64),password varchar(64) not null,user_type varchar(64));
+create table categories(category_id int auto_increment primary key not null,category varchar(64) not null unique,order_column int);
+create table products(productid int auto_increment primary key,name varchar(64),description varchar(64),image blob,price int,category_id int not null,foreign key (category_id) references categories(category_id),featured bit not null);
+create table promotions(id int auto_increment primary key,name varchar(64)not null,description varchar(64) not null,start_date date not null,end_date date not null,created_on timestamp,saleprice int,discount_amount int,zipcode varchar(64),promotion_type varchar(64));
+create table carts(cart_id int auto_increment primary key,status varchar(64)not null,created_on timestamp,user_id int not null,foreign key (user_id) references users(userid),zip_code varchar(64) not null);
+create table cartproducts( cartproducts_id int auto_increment primary key not null,cart_id int not null, foreign key (cart_id) references carts(cart_id),productid int not null,foreign key (productid) references products(productid),quantity int);
+create table cart_promotions(cart_promotions_id int auto_increment primary key,promotion_id int not null,foreign key (promotion_id) references promotions(id),productid int not null, foreign key (productid) references products(productid));
